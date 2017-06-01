@@ -27,8 +27,12 @@ static int encrypt(lua_State *L) {
 	key  = luaL_checklstring(L, 2, &key_len);
 	result = xxtea_encrypt(data, data_len, key, &out_len);
 
-	lua_pushlstring(L, (const char *)result, out_len);
-	free(result);
+	if(result == NULL){
+		lua_pushnil(L);
+	}else{
+		lua_pushlstring(L, (const char *)result, out_len);
+		free(result);
+	}
 
 	return 1;
 }
@@ -42,8 +46,12 @@ static int decrypt(lua_State *L) {
 	key  = luaL_checklstring(L, 2, &key_len);
 	result = xxtea_decrypt(data, data_len, key, &out_len);
 
-	lua_pushlstring(L, (const char *)result, out_len);
-	free(result);
+	if(result == NULL){
+		lua_pushnil(L);
+	}else{
+		lua_pushlstring(L, (const char *)result, out_len);
+		free(result);
+	}
 
 	return 1;
 }
