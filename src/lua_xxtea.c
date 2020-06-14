@@ -10,7 +10,7 @@
 |                                                          |
 | Code Authors: Chen fei <cf850118@163.com>                |
 |               Ma Bingyao <mabingyao@gmail.com>           |
-| LastModified: Feb 7, 2016                                |
+| LastModified: Jun 15, 2020                               |
 |                                                          |
 \**********************************************************/
 
@@ -28,7 +28,7 @@ static int encrypt(lua_State *L) {
 	result = xxtea_encrypt(data, data_len, key, &out_len);
 
 	if(result == NULL){
-		lua_pushnil(L);
+		lua_pushlstring(L, "", 0);
 	}else{
 		lua_pushlstring(L, (const char *)result, out_len);
 		free(result);
@@ -47,7 +47,7 @@ static int decrypt(lua_State *L) {
 	result = xxtea_decrypt(data, data_len, key, &out_len);
 
 	if(result == NULL){
-		lua_pushnil(L);
+		lua_pushlstring(L, "", 0);
 	}else{
 		lua_pushlstring(L, (const char *)result, out_len);
 		free(result);
